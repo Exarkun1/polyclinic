@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+</head>
+<body>
+    <form method="GET" action="/doctor/patients">
+        <label for="name"></label>
+        <input type="text" name="name" id="name" placeholder="Имя пациента">
+        <input type="submit" value="Найти">
+    </form>
+    <div th:each="patient : ${patients}">
+        <hr/>
+        <p th:text="${patient.getFullName()}"></p>
+        <p th:text="${patient.getBirthday()}"></p>
+        <p th:text="${patient.getAddress()}"></p>
+        <form th:method="GET" th:action="@{/doctor/{id}/history(id=${patient.getId()})}">
+            <input type="submit" value="Посмотреть историю">
+        </form>
+    </div>
+</body>
+</html>

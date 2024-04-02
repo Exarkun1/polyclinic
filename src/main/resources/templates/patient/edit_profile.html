@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EditProfile</title>
+</head>
+<body>
+    <form th:method="PATCH" th:action="@{/patient/edit/profile}" th:object="${editRequest}">
+        <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color:red"></p>
+        <label for="login"></label>
+        <input type="text" th:field="*{login}" id="login" placeholder="Логин">
+        <br/>
+        <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color:red"></p>
+        <label for="fullName"></label>
+        <input type="text" th:field="*{fullName}" id="fullName" placeholder="Полное имя">
+        <br/>
+        <p th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" style="color:red"></p>
+        <label for="birthday"></label>
+        <input type="date" th:field="*{birthday}" id="birthday">
+        <br/>
+        <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></p>
+        <label for="address"></label>
+        <input type="text" th:field="*{address}" id="address" placeholder="Адрес">
+        <br/>
+        <input type="submit" value="Сохранить">
+    </form>
+    <form th:method="PATCH" th:action="@{/patient/edit/password}" th:object="${editPasswordRequest}">
+        <p th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}" style="color:red"></p>
+        <label for="oldPassword"></label>
+        <input type="password" th:field="*{oldPassword}" id="oldPassword" placeholder="Старый пароль">
+        <br/>
+        <p th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}" style="color:red"></p>
+        <label for="newPassword"></label>
+        <input type="password" th:field="*{newPassword}" id="newPassword" placeholder="Новый пароль">
+        <br/>
+        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
+        <label for="confirmPassword"></label>
+        <input type="password" th:field="*{confirmPassword}" id="confirmPassword" placeholder="Подтвердить пароль">
+        <br/>
+        <input type="submit" value="Сохранить пароль">
+    </form>
+</body>
+</html>

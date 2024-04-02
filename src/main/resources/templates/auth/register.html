@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/auth/register}" th:object="${registerRequest}">
+        <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color:red"></p>
+        <label for="login"></label>
+        <input type="text" th:field="*{login}" id="login" placeholder="Логин">
+        <br/>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></p>
+        <label for="password"></label>
+        <input type="password" th:field="*{password}" id="password" placeholder="Пароль">
+        <br/>
+        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
+        <label for="confirmPassword"></label>
+        <input type="password" th:field="*{confirmPassword}" id="confirmPassword" placeholder="Подтвердить пароль">
+        <br/>
+        <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color:red"></p>
+        <label for="fullName"></label>
+        <input type="text" th:field="*{fullName}" id="fullName" placeholder="Полное имя">
+        <br/>
+        <p th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" style="color:red"></p>
+        <label for="birthday"></label>
+        <input type="date" th:field="*{birthday}" id="birthday">
+        <br/>
+        <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></p>
+        <label for="address"></label>
+        <input type="text" th:field="*{address}" id="address" placeholder="Адрес">
+        <br/>
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+</body>
+</html>

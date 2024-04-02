@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Appointment</title>
+</head>
+<body>
+    <p th:text="${appointment.getPatient().getFullName()}"></p>
+    <p th:text="${appointment.getDateTime()}"></p>
+    <p th:text="${appointment.getPatientComment()}"></p>
+    <form th:method="PATCH" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}" th:object="${appointmentRequest}">
+        <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}" style="color:red"></p>
+        <label for="status"></label>
+        <select th:field="*{status}" id="status">
+            <option th:each="st : ${statuses}" th:value="${st}" th:text="${st.getRuName()}"></option>
+        </select>
+        <br/>
+        <p th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}" style="color:red"></p>
+        <label for="diagnosis"></label>
+        <input type="text" th:field="*{diagnosis}" id="diagnosis" placeholder="Диагноз">
+        <br/>
+        <p th:if="${#fields.hasErrors('treatmentMeasures')}" th:errors="*{treatmentMeasures}" style="color:red"></p>
+        <label for="treatmentMeasures"></label>
+        <input type="text" th:field="*{treatmentMeasures}" id="treatmentMeasures" placeholder="Рекомендации к лечению">
+        <br/>
+        <input type="submit" value="Сохранить">
+    </form>
+</body>
+</html>

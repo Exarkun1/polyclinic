@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+</head>
+<body>
+    <div th:each="appointment : ${appointments}">
+        <hr/>
+        <p th:text="${appointment.getDoctor().getFullName()}"></p>
+        <p th:text="${appointment.getDoctor().getJob().getName()}"></p>
+        <p th:text="${appointment.getDateTime()}"></p>
+        <p th:text="${appointment.getPatientComment()}"></p>
+        <p th:text="${appointment.getStatus().getRuName()}"></p>
+        <p th:if="${appointment.getStatus() != expectation}" th:text="${appointment.getDiagnosis()}"></p>
+        <p th:if="${appointment.getStatus() != expectation}" th:text="${appointment.getTreatmentMeasures()}"></p>
+        <form th:if="${appointment.getStatus() == expectation}" th:method="DELETE" th:action="@{/patient/delete/appointment/{id}(id=${appointment.getId()})}">
+            <input type="submit" value="Удалить запись">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/auth/login}" th:object="${loginRequest}">
+        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
+        <label for="login"></label>
+        <input type="text" th:field="*{login}" id="login" placeholder="Логин">
+        <br/>
+        <label for="password"></label>
+        <input type="password" th:field="*{password}" id="password" placeholder="Пароль">
+        <br/>
+        <label for="roles"></label>
+        <select th:field="*{role}" id="roles">
+            <option th:each="rl : ${roles}" th:value="${rl}" th:text="${rl.getRuName()}"></option>
+        </select>
+        <br/>
+        <input type="submit" value="Войти">
+    </form>
+    Ещё нет аккаунта? <a href="/auth/register">Регистрация</a>
+</body>
+</html>

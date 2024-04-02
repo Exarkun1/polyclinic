@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+</head>
+<body>
+    <form method="GET" action="/patient/doctors">
+        <label for="jobs"></label>
+        <select name="job" id="jobs">
+            <option value="">Все врачи</option>
+            <option th:each="job : ${jobs}" th:value="${job.getName()}" th:text="${job.getName()}"></option>
+        </select>
+        <input type="submit" value="Искать">
+    </form>
+    <div th:each="doctor : ${doctors}">
+        <hr/>
+        <p th:text="${doctor.getFullName()}"></p>
+        <p th:text="${'Смена ' + (doctor.getShift() == 0 ? 'чётна' : 'нечётная')}"></p>
+        <p th:text="${doctor.getJob().getName()}"></p>
+        <form th:method="GET" th:action="@{/patient/new/{id}/appointment(id=${doctor.getId()})}">
+            <input type="submit" value="Записаться">
+        </form>
+    </div>
+</body>
+</html>

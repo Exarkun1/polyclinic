@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <p th:text="${'Полное имя: ' + patient.getFullName()}"></p>
+    <p th:text="${'Дата рождения: ' + patient.getBirthday()}"></p>
+    <p th:text="${'Адрес: ' + patient.getAddress()}"></p>
+    <p th:text="${'Логин: ' + patient.getUserData().getLogin()}">
+    <p th:text="${'Роль: ' + patient.getUserData().getRole().getRuName()}">
+    <form method="GET" action="/patient/edit/profile">
+        <input type="submit" value="Изменить данные">
+    </form>
+    <form method="POST" action="/auth/logout">
+        <input type="submit" value="Выйти">
+    </form>
+</body>
+</html>

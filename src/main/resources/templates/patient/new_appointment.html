@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NewAppointment</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/patient/new/{id}/appointment(id=${appointmentRequest.getDoctorId()})}" th:object="${appointmentRequest}">
+        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
+        <label for="date"></label>
+        <select th:onchange="findDateOption(this)" th:field="*{date}" id="date">
+            <option th:each="ft : ${freeTimes}" th:value="${ft.a}" th:text="${ft.a}"></option>
+        </select>
+        <br/>
+        <label for="time"></label>
+        <select th:field="*{time}" id="time">
+            <option th:each="tm : ${freeTimes.getFirst().b}" th:value="${tm}" th:text="${tm}"></option>
+        </select>
+        <br/>
+        <label for="comment"></label>
+        <input type="text" th:field="*{comment}" id="comment">
+        <br/>
+        <input type="submit" value="Записаться">
+    </form>
+    <script th:inline="javascript">
+        let freeTimes = [[${freeTimes}]];
+        let timeSelect = document.getElementById('time');
+        function findDateOption(select) {
+            let day = freeTimes.find(x => x.a === select.value);
+            let dayTimes = day.b;
+            removeOptions(timeSelect);
+            addOptions(timeSelect, dayTimes);
+        }
+        function removeOptions(select) {
+            let L = select.options.length - 1;
+            for(let i = L; i >= 0; i--) {
+                select.remove(i);
+            }
+        }
+        function addOptions(select, args) {
+            for (let arg of args){
+                var option = document.createElement('option');
+                option.value = arg;
+                option.innerHTML = arg;
+                select.appendChild(option);
+            }
+        }
+    </script>
+</body>
+</html>

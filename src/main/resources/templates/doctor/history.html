@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>History</title>
+</head>
+<body>
+    <p th:text="${'Полное имя: ' + patient.getFullName()}"></p>
+    <p th:text="${'Дата рождения: ' + patient.getBirthday()}"></p>
+    <p th:text="${'Адрес: ' + patient.getAddress()}"></p>
+    <div th:each="appointment :${appointments}">
+        <hr/>
+        <p th:text="${appointment.getDoctor().getFullName()}"></p>
+        <p th:text="${appointment.getDoctor().getJob().getName()}"></p>
+        <p th:text="${appointment.getDateTime()}"></p>
+        <p th:text="${appointment.getPatientComment()}"></p>
+        <p th:text="${appointment.getStatus().getRuName()}"></p>
+        <p th:text="${appointment.getDiagnosis()}"></p>
+        <p th:text="${appointment.getTreatmentMeasures()}"></p>
+        <form th:method="GET" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}">
+            <input type="submit" value="Изменить данные">
+        </form>
+    </div>
+</body>
+</html>

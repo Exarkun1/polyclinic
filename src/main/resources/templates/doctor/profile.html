@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <p th:text="${'Полное имя: ' + doctor.getFullName()}"></p>
+    <p th:text="${'Должность: ' + doctor.getJob().getName()}"></p>
+    <p th:text="${'Сменность: ' + doctor.getShiftName()}"></p>
+    <p th:text="${'Логин: ' + doctor.getUserData().getLogin()}">
+    <p th:text="${'Роль: ' + doctor.getUserData().getRole().getRuName()}">
+    <form method="POST" action="/auth/logout">
+        <input type="submit" value="Выйти">
+    </form>
+</body>
+</html>
