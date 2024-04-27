@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
 </head>
 <body>
-    <form method="GET" action="/patient/profile">
-        <input type="submit" value="Профиль">
-    </form>
-    <form method="GET" action="/patient/doctors">
-        <input type="submit" value="Запись на приём">
-    </form>
-    <form method="GET" action="/patient/appointments">
-        <input type="submit" value="Мои записи">
-    </form>
+    <div class="center">
+        <form class="fld" method="GET" action="/patient/profile">
+            <input class="inp btn" type="submit" value="Профиль">
+        </form>
+        <form class="fld" method="GET" action="/patient/doctors">
+            <input class="inp btn" type="submit" value="Запись на приём">
+        </form>
+        <form class="fld" method="GET" action="/patient/appointments">
+            <input class="inp btn" type="submit" value="Мои записи">
+        </form>
+    </div>
 </body>
 </html>

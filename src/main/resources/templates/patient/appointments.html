@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Appointments</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+    <link rel="stylesheet" type="text/css" href="/css/list.css?version=51">
 </head>
 <body>
-    <div th:each="appointment : ${appointments}">
-        <hr/>
-        <p th:text="${appointment.getDoctor().getFullName()}"></p>
-        <p th:text="${appointment.getDoctor().getJob().getName()}"></p>
-        <p th:text="${appointment.getDateTime()}"></p>
-        <p th:text="${appointment.getPatientComment()}"></p>
-        <p th:text="${appointment.getStatus().getRuName()}"></p>
-        <p th:if="${appointment.getStatus() != expectation}" th:text="${appointment.getDiagnosis()}"></p>
-        <p th:if="${appointment.getStatus() != expectation}" th:text="${appointment.getTreatmentMeasures()}"></p>
-        <form th:if="${appointment.getStatus() == expectation}" th:method="DELETE" th:action="@{/patient/delete/appointment/{id}(id=${appointment.getId()})}">
-            <input type="submit" value="Удалить запись">
-        </form>
+    <a class="home" href="/patient/main"></a>
+    <div class="clip_fst"></div>
+    <div class="clip_sec">
+        <div class="plt" th:each="appointment : ${appointments}">
+            <div class="fld">
+                <span class="txt" th:text="${'ФИО: ' + appointment.getDoctor().getFullName()}"></span>
+            </div>
+            <div class="fld">
+                <span class="txt" th:text="${'Должность: ' + appointment.getDoctor().getJob().getName()}"></span>
+            </div>
+            <div class="fld">
+                <span class="txt" th:text="${'Дата рождения: ' + appointment.getDateTime()}"></span>
+            </div>
+            <div class="fld">
+                <span class="txt" th:if="${appointment.getPatientComment() != null}" th:text="${'Комментарий: ' + appointment.getPatientComment()}"></span>
+            </div>
+            <div class="fld">
+                <span class="txt" th:text="${'Статус: ' + appointment.getStatus().getRuName()}"></span>
+            </div>
+            <div class="fld">
+                <span class="txt" th:if="${appointment.getStatus() != expectation}" th:text="${'Диагноз: ' + appointment.getDiagnosis()}"></span>
+            </div>
+            <div class="fld">
+                <span class="txt" th:if="${appointment.getStatus() != expectation}" th:text="${'Рекомендации: ' + appointment.getTreatmentMeasures()}"></span>
+            </div>
+            <form class="fld" th:if="${appointment.getStatus() == expectation}" th:method="DELETE" th:action="@{/patient/delete/appointment/{id}(id=${appointment.getId()})}">
+                <input class="inp btn" type="submit" value="Удалить запись">
+            </form>
+        </div>
     </div>
 </body>
 </html>

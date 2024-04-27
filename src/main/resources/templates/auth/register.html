@@ -3,34 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+    <link rel="stylesheet" type="text/css" href="/css/password.css?version=51">
+    <script src="/js/password.js?version=51"></script>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/auth/register}" th:object="${registerRequest}">
-        <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color:red"></p>
-        <label for="login"></label>
-        <input type="text" th:field="*{login}" id="login" placeholder="Логин">
-        <br/>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></p>
-        <label for="password"></label>
-        <input type="password" th:field="*{password}" id="password" placeholder="Пароль">
-        <br/>
-        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
-        <label for="confirmPassword"></label>
-        <input type="password" th:field="*{confirmPassword}" id="confirmPassword" placeholder="Подтвердить пароль">
-        <br/>
-        <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color:red"></p>
-        <label for="fullName"></label>
-        <input type="text" th:field="*{fullName}" id="fullName" placeholder="Полное имя">
-        <br/>
-        <p th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" style="color:red"></p>
-        <label for="birthday"></label>
-        <input type="date" th:field="*{birthday}" id="birthday">
-        <br/>
-        <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></p>
-        <label for="address"></label>
-        <input type="text" th:field="*{address}" id="address" placeholder="Адрес">
-        <br/>
-        <input type="submit" value="Зарегистрироваться">
+    <form class="center" th:method="POST" th:action="@{/auth/register}" th:object="${registerRequest}">
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+            <br th:if="${#fields.hasErrors('login')}"/>
+            <label for="login"></label>
+            <input class="inp" type="text" th:field="*{login}" id="login" placeholder="Логин">
+        </div>
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <br th:if="${#fields.hasErrors('password')}"/>
+            <label for="password"></label>
+            <input class="inp password" type="password" th:field="*{password}" id="password" placeholder="Пароль">
+            <a class="password-view" onclick="showPassword(this);"></a>
+        </div>
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></span>
+            <br th:if="${#fields.hasGlobalErrors()}"/>
+            <label for="confirmPassword"></label>
+            <input class="inp password" type="password" th:field="*{confirmPassword}" id="confirmPassword" placeholder="Подтвердить пароль">
+            <a class="password-view" onclick="showPassword(this);"></a>
+        </div>
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+            <br th:if="${#fields.hasErrors('fullName')}"/>
+            <label for="fullName"></label>
+            <input class="inp" type="text" th:field="*{fullName}" id="fullName" placeholder="Полное имя">
+        </div>
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
+            <br th:if="${#fields.hasErrors('birthday')}"/>
+            <label for="birthday"></label>
+            <input class="inp" type="date" th:field="*{birthday}" id="birthday">
+        </div>
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            <br th:if="${#fields.hasErrors('address')}"/>
+            <label for="address"></label>
+            <input class="inp" type="text" th:field="*{address}" id="address" placeholder="Адрес">
+        </div>
+        <div class="fld">
+            <input class="inp btn" type="submit" value="Зарегистрироваться">
+        </div>
     </form>
 </body>
 </html>

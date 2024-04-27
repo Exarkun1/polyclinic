@@ -1,0 +1,8 @@
+.line{
+    display: flex;
+    flex-direction: row;
+}
+
+.line-el + .line-el{
+    padding-left: 20px;
+}

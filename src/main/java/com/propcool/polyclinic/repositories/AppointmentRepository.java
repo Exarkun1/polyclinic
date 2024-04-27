@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    @Query("select a from Appointment a join a.patient p join p.userData u where u.login = :login order by a.dateTime")
+    @Query("select a from Appointment a join a.patient p join p.userData u where u.login = :login order by a.dateTime desc")
     List<Appointment> findWithPatientLogin(String login);
 
     @Query("select a from Appointment a join a.doctor d join d.userData u where u.login = :login and a.status = :status order by a.dateTime")

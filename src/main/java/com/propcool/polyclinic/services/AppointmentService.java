@@ -12,6 +12,7 @@ import com.propcool.polyclinic.utils.security.UserDetails;
 import com.propcool.polyclinic.utils.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
 import org.antlr.v4.runtime.misc.Pair;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,22 +80,32 @@ public class AppointmentService {
      * */
     @Transactional(readOnly = true)
     public List<Pair<LocalDate, List<LocalTime>>> getTwoWeeksFreeTime(long id) {
+        // Получаем доктора
         Doctor doctor = doctorService.getDoctor(id);
+        // Получаем список часов, в которые доктор занят в ближайшие 2 недели
         List<LocalDateTime> dateTimes = doctor.getAppointments().stream()
                 .map(Appointment::getDateTime)
                 .filter(dateTimeUtil::inTwoWeeks).toList();
+        // Получаем рабочие дни ближайших 2 недель
         List<LocalDate> dates = dateTimeUtil.twoWeeks();
         List<Pair<LocalDate, List<LocalTime>>> pairs = new ArrayList<>();
+        // Для каждой даты в плучаем список часов
         for(var date : dates) {
+            // Получаем часы, в которые доктор занят в данный день
             List<LocalTime> times = dateTimes.stream()
                     .filter(dt -> dt.toLocalDate().isEqual(date))
                     .map(LocalDateTime::toLocalTime).toList();
+            // В зависимости от сменности доктора выбираем, список часов на данный день
             if(date.getDayOfMonth() % 2 == doctor.getShift()) {
+                // Получаем список часов для нечётной смены
                 List<LocalTime> first = dateTimeUtil.shiftFirst();
+                // Удаляем из списка часы, в которые доктор уже занят в данный день
                 first.removeAll(times);
                 pairs.add(new Pair<>(date, first));
             } else {
+                // Получаем список часов для чётной смены
                 List<LocalTime> second = dateTimeUtil.shiftSecond();
+                // Удаляем из списка часы, в которые доктор уже занят в данный день
                 second.removeAll(times);
                 pairs.add(new Pair<>(date, second));
             }

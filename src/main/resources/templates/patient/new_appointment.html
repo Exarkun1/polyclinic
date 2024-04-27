@@ -3,48 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>NewAppointment</title>
-</head>
-<body>
-    <form th:method="POST" th:action="@{/patient/new/{id}/appointment(id=${appointmentRequest.getDoctorId()})}" th:object="${appointmentRequest}">
-        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
-        <label for="date"></label>
-        <select th:onchange="findDateOption(this)" th:field="*{date}" id="date">
-            <option th:each="ft : ${freeTimes}" th:value="${ft.a}" th:text="${ft.a}"></option>
-        </select>
-        <br/>
-        <label for="time"></label>
-        <select th:field="*{time}" id="time">
-            <option th:each="tm : ${freeTimes.getFirst().b}" th:value="${tm}" th:text="${tm}"></option>
-        </select>
-        <br/>
-        <label for="comment"></label>
-        <input type="text" th:field="*{comment}" id="comment">
-        <br/>
-        <input type="submit" value="Записаться">
-    </form>
     <script th:inline="javascript">
         let freeTimes = [[${freeTimes}]];
-        let timeSelect = document.getElementById('time');
-        function findDateOption(select) {
-            let day = freeTimes.find(x => x.a === select.value);
-            let dayTimes = day.b;
-            removeOptions(timeSelect);
-            addOptions(timeSelect, dayTimes);
-        }
-        function removeOptions(select) {
-            let L = select.options.length - 1;
-            for(let i = L; i >= 0; i--) {
-                select.remove(i);
-            }
-        }
-        function addOptions(select, args) {
-            for (let arg of args){
-                var option = document.createElement('option');
-                option.value = arg;
-                option.innerHTML = arg;
-                select.appendChild(option);
-            }
-        }
     </script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+    <script src="/js/options.js?version=51"></script>
+</head>
+<body>
+    <a class="home" href="/patient/main"></a>
+    <form class="center" th:method="POST" th:action="@{/patient/new/{id}/appointment(id=${appointmentRequest.getDoctorId()})}" th:object="${appointmentRequest}">
+        <div class="fld">
+            <span class="err" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></span>
+            <br th:if="${#fields.hasGlobalErrors()}"/>
+            <label for="date"></label>
+            <select class="inp" th:onchange="findDateOption(this)" th:field="*{date}" id="date">
+                <option th:each="ft : ${freeTimes}" th:value="${ft.a}" th:text="${ft.a}"></option>
+            </select>
+        </div>
+        <div class="fld">
+            <label for="time"></label>
+            <select class="inp time_slr" th:field="*{time}" id="time">
+                <option th:each="tm : ${freeTimes.getFirst().b}" th:value="${tm}" th:text="${tm}"></option>
+            </select>
+        </div>
+        <div class="fld">
+            <label for="comment"></label>
+            <input class="inp" type="text" th:field="*{comment}" id="comment">
+        </div>
+        <div class="fld">
+            <input class="inp btn" type="submit" value="Записаться">
+        </div>
+    </form>
 </body>
 </html>

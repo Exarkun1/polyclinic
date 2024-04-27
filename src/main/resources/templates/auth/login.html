@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+    <link rel="stylesheet" type="text/css" href="/css/password.css?version=51">
+    <script src="/js/password.js?version=51"></script>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/auth/login}" th:object="${loginRequest}">
-        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></p>
-        <label for="login"></label>
-        <input type="text" th:field="*{login}" id="login" placeholder="Логин">
-        <br/>
-        <label for="password"></label>
-        <input type="password" th:field="*{password}" id="password" placeholder="Пароль">
-        <br/>
-        <label for="roles"></label>
-        <select th:field="*{role}" id="roles">
-            <option th:each="rl : ${roles}" th:value="${rl}" th:text="${rl.getRuName()}"></option>
-        </select>
-        <br/>
-        <input type="submit" value="Войти">
-    </form>
-    Ещё нет аккаунта? <a href="/auth/register">Регистрация</a>
+    <div class="center">
+        <form th:method="POST" th:action="@{/auth/login}" th:object="${loginRequest}">
+            <div class="fld">
+                <span class="err" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></span>
+                <br th:if="${#fields.hasGlobalErrors()}"/>
+                <label for="login"></label>
+                <input class="inp" type="text" th:field="*{login}" id="login" placeholder="Логин">
+            </div>
+            <div class="fld">
+                <label for="password"></label>
+                <input class="inp password" type="password" th:field="*{password}" id="password" placeholder="Пароль">
+                <a class="password-view" onclick="showPassword(this);"></a>
+            </div>
+            <div class="fld">
+                <label for="roles"></label>
+                <select class="inp" th:field="*{role}" id="roles">
+                    <option th:each="rl : ${roles}" th:value="${rl}" th:text="${rl.getRuName()}"></option>
+                </select>
+            </div>
+            <div class="fld">
+                <input class="inp btn" type="submit" value="Войти">
+            </div>
+        </form>
+        <div><span class="low">Ещё нет аккаунта? <a href="/auth/register">Регистрация</a></span></div>
+    </div>
 </body>
 </html>

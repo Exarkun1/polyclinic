@@ -34,6 +34,7 @@ public class PatientController {
     public String doctors(@RequestParam(value = "job", required = false) String job, Model model) {
         model.addAttribute("doctors", doctorService.getDoctors(job));
         model.addAttribute("jobs", jobService.getJobs());
+        model.addAttribute("selectedJob", job);
         return "patient/doctors";
     }
 
@@ -81,7 +82,7 @@ public class PatientController {
 
     @GetMapping("/edit/profile")
     public String editProfile(Model model) {
-        model.addAttribute("editRequest", patientService.getEditProfileRequest(securityUtil.getDetails()));
+        model.addAttribute("editProfileRequest", patientService.getEditProfileRequest(securityUtil.getDetails()));
         model.addAttribute("editPasswordRequest", new EditPasswordRequest());
         return "/patient/edit_profile";
     }
@@ -105,7 +106,7 @@ public class PatientController {
             BindingResult errors, Model model
     ) {
         if(errors.hasErrors()) { // В случае неверных данных вновь загружать страницу
-            model.addAttribute("editRequest", patientService.getEditProfileRequest(securityUtil.getDetails()));
+            model.addAttribute("editProfileRequest", patientService.getEditProfileRequest(securityUtil.getDetails()));
             return "patient/edit_profile";
         }
         userDataService.editPassword(editPasswordRequest, securityUtil.getDetails());
