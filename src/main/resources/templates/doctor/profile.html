@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
 </head>
 <body>
-    <p th:text="${'Полное имя: ' + doctor.getFullName()}"></p>
-    <p th:text="${'Должность: ' + doctor.getJob().getName()}"></p>
-    <p th:text="${'Сменность: ' + doctor.getShiftName()}"></p>
-    <p th:text="${'Логин: ' + doctor.getUserData().getLogin()}">
-    <p th:text="${'Роль: ' + doctor.getUserData().getRole().getRuName()}">
-    <form method="POST" action="/auth/logout">
-        <input type="submit" value="Выйти">
-    </form>
+    <a class="home" href="/doctor/main"></a>
+    <div class="center">
+        <div class="fld">
+            <span class="inp txt" th:text="${'ФИО: ' + doctor.getFullName()}"></span>
+        </div>
+        <div class="fld">
+            <span class="inp txt" th:text="${'Должность: ' + doctor.getJob().getName()}"></span>
+        </div>
+        <div class="fld">
+            <span class="inp txt" th:text="${'Сменность: ' + doctor.getShiftName()}"></span>
+        </div>
+        <div class="fld">
+            <span class="inp txt" th:text="${'Логин: ' + doctor.getUserData().getLogin()}"></span>
+        </div>
+        <div class="fld">
+            <span class="inp txt" th:text="${'Роль: ' + doctor.getUserData().getRole().getRuName()}"></span>
+        </div>
+        <form class="fld" method="POST" action="/auth/logout">
+            <input class="inp btn" type="submit" value="Выйти">
+        </form>
+    </div>
 </body>
 </html>

@@ -3,27 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Appointment</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
 </head>
 <body>
-    <p th:text="${appointment.getPatient().getFullName()}"></p>
-    <p th:text="${appointment.getDateTime()}"></p>
-    <p th:text="${appointment.getPatientComment()}"></p>
-    <form th:method="PATCH" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}" th:object="${appointmentRequest}">
-        <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}" style="color:red"></p>
-        <label for="status"></label>
-        <select th:field="*{status}" id="status">
-            <option th:each="st : ${statuses}" th:value="${st}" th:text="${st.getRuName()}"></option>
-        </select>
-        <br/>
-        <p th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}" style="color:red"></p>
-        <label for="diagnosis"></label>
-        <input type="text" th:field="*{diagnosis}" id="diagnosis" placeholder="Диагноз">
-        <br/>
-        <p th:if="${#fields.hasErrors('treatmentMeasures')}" th:errors="*{treatmentMeasures}" style="color:red"></p>
-        <label for="treatmentMeasures"></label>
-        <input type="text" th:field="*{treatmentMeasures}" id="treatmentMeasures" placeholder="Рекомендации к лечению">
-        <br/>
-        <input type="submit" value="Сохранить">
-    </form>
+    <a class="home" href="/doctor/main"></a>
+    <div class="center">
+        <div class="fld">
+            <span class="inp txt" th:text="${'ФИО: ' + appointment.getPatient().getFullName()}"></span>
+        </div>
+        <div class="fld">
+            <span class="inp txt" th:text="${'Дата и время: ' + appointment.getDateTime()}"></span>
+        </div>
+        <div class="fld">
+            <span class="inp txt" th:text="${'Комментарий: ' + appointment.getPatientComment()}"></span>
+        </div>
+        <form class="fld" th:method="PATCH" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}" th:object="${appointmentRequest}">
+            <div class="fld">
+                <span class="err" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+                <label for="status"></label>
+                <select class="inp" th:field="*{status}" id="status">
+                    <option th:each="st : ${statuses}" th:value="${st}" th:text="${st.getRuName()}"></option>
+                </select>
+            </div>
+            <div class="fld">
+                <span class="err" th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}"></span>
+                <label for="diagnosis"></label>
+                <input class="inp" type="text" th:field="*{diagnosis}" id="diagnosis" placeholder="Диагноз">
+            </div>
+            <div class="fld">
+                <span class="err" th:if="${#fields.hasErrors('treatmentMeasures')}" th:errors="*{treatmentMeasures}"></span>
+                <label for="treatmentMeasures"></label>
+                <input class="inp" type="text" th:field="*{treatmentMeasures}" id="treatmentMeasures" placeholder="Рекомендации к лечению">
+            </div>
+            <div class="fld">
+                <input class="inp btn" type="submit" value="Сохранить">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Patients</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+    <link rel="stylesheet" type="text/css" href="/css/list.css?version=51">
 </head>
 <body>
-    <form method="GET" action="/doctor/patients">
-        <label for="name"></label>
-        <input type="text" name="name" id="name" placeholder="Имя пациента">
-        <input type="submit" value="Найти">
-    </form>
-    <div th:each="patient : ${patients}">
-        <hr/>
-        <p th:text="${patient.getFullName()}"></p>
-        <p th:text="${patient.getBirthday()}"></p>
-        <p th:text="${patient.getAddress()}"></p>
-        <form th:method="GET" th:action="@{/doctor/{id}/history(id=${patient.getId()})}">
-            <input type="submit" value="Посмотреть историю">
+    <a class="home" href="/doctor/main"></a>
+    <div class="clip_fst"></div>
+    <div class="clip_sec">
+        <form class="top" method="GET" action="/doctor/patients">
+            <label for="name"></label>
+            <input class="inp" type="text" name="name" id="name" placeholder="ФИО пациента">
+            <br/>
+            <input class="inp btn" type="submit" value="Найти">
         </form>
+        <div class="plt" th:each="patient : ${patients}">
+            <div class="fld">
+                <span class="inp txt" th:text="${'ФИО: ' + patient.getFullName()}"></span>
+            </div>
+            <div class="fld">
+                <span class="inp txt" th:text="${'Дата рождения: ' + patient.getBirthday()}"></span>
+            </div>
+            <div class="fld">
+                <span class="inp txt" th:text="${'Адрес: ' + patient.getAddress()}"></span>
+            </div>
+            <form class="fld" th:method="GET" th:action="@{/doctor/{id}/history(id=${patient.getId()})}">
+                <input class="inp btn" type="submit" value="Посмотреть историю">
+            </form>
+        </div>
     </div>
 </body>
 </html>

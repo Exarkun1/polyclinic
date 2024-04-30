@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Appointments</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+    <link rel="stylesheet" type="text/css" href="/css/list.css?version=51">
 </head>
 <body>
-    <div th:each="appointment : ${appointments}">
-        <hr/>
-        <p th:text="${appointment.getPatient().getFullName()}"></p>
-        <p th:text="${appointment.getDateTime()}"></p>
-        <p th:text="${appointment.getPatientComment()}"></p>
-        <form th:if="${appointment.getDateTime().isBefore(curDateTime)}" th:method="GET" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}">
-            <input type="submit" value="Заполнить форму">
-        </form>
+    <a class="home" href="/doctor/main"></a>
+    <div class="clip_fst"></div>
+    <div class="clip_sec">
+        <div class="plt" th:each="appointment : ${appointments}">
+            <div class="fld">
+                <span class="inp txt" th:text="${'ФИО: ' + appointment.getPatient().getFullName()}"></span>
+            </div>
+            <div class="fld">
+                <span class="inp txt" th:text="${'Дата и время: ' + appointment.getDateTime()}"></span>
+            </div>
+            <div class="fld">
+                <span class="inp txt" th:text="${'Комментарий: ' + appointment.getPatientComment()}"></span>
+            </div>
+            <form class="fld" th:if="${appointment.getDateTime().isBefore(curDateTime)}" th:method="GET" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}">
+                <input class="inp btn" type="submit" value="Заполнить форму">
+            </form>
+        </div>
     </div>
 </body>
 </html>

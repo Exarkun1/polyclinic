@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <title>Profile</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
-    <link rel="stylesheet" type="text/css" href="/css/list.css?version=51">
 </head>
 <body>
     <a class="home" href="/patient/main"></a>
     <div class="center">
         <div class="fld">
-            <span class="txt" th:text="${'Полное имя: ' + patient.getFullName()}"></span>
+            <span class="inp txt" th:text="${'ФИО: ' + patient.getFullName()}"></span>
         </div>
         <div class="fld">
-            <span class="txt" th:text="${'Дата рождения: ' + patient.getBirthday()}"></span>
+            <span class="inp txt" th:text="${'Дата рождения: ' + patient.getBirthday()}"></span>
         </div>
         <div class="fld">
-            <span class="txt" th:text="${'Адрес: ' + patient.getAddress()}"></span>
+            <span class="inp txt" th:text="${'Адрес: ' + patient.getAddress()}"></span>
         </div>
         <div class="fld">
-            <span class="txt" th:text="${'Логин: ' + patient.getUserData().getLogin()}"></span>
+            <span class="inp txt" th:text="${'Логин: ' + patient.getUserData().getLogin()}"></span>
         </div>
         <div class="fld">
-            <span class="txt" th:text="${'Роль: ' + patient.getUserData().getRole().getRuName()}"></span>
+            <span class="inp txt" th:text="${'Роль: ' + patient.getUserData().getRole().getRuName()}"></span>
         </div>
         <form class="fld" method="GET" action="/patient/edit/profile">
             <input class="inp btn" type="submit" value="Изменить данные">

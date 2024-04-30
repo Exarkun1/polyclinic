@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css?version=51">
+</head>
+<body>
+    <div class="center">
+        <div class="fld">
+           <span class="err_txt">Произошла непредвиденная ошибка :(</span>
+        </div>
+        <form th:if="${role != null}" class="fld" th:method="GET" th:action="@{/{rl}/main(rl=${role})}">
+            <input class="inp btn" type="submit" value="Вернуться на главный экран">
+        </form>
+        <form th:if="${role == null}" class="fld" method="GET" action="/auth/login">
+            <input class="inp btn" type="submit" value="Вернуться к авторизации">
+        </form>
+    </div>
+</body>
+</html>
