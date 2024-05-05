@@ -20,6 +20,7 @@
         <form class="fld" th:method="PATCH" th:action="@{/doctor/edit/appointment/{id}(id=${appointment.getId()})}" th:object="${appointmentRequest}">
             <div class="fld">
                 <span class="err" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+                <br th:if="${#fields.hasErrors('status')}"/>
                 <label for="status"></label>
                 <select class="inp" th:field="*{status}" id="status">
                     <option th:each="st : ${statuses}" th:value="${st}" th:text="${st.getRuName()}"></option>
@@ -27,11 +28,13 @@
             </div>
             <div class="fld">
                 <span class="err" th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}"></span>
+                <br th:if="${#fields.hasErrors('diagnosis')}"/>
                 <label for="diagnosis"></label>
                 <input class="inp" type="text" th:field="*{diagnosis}" id="diagnosis" placeholder="Диагноз">
             </div>
             <div class="fld">
                 <span class="err" th:if="${#fields.hasErrors('treatmentMeasures')}" th:errors="*{treatmentMeasures}"></span>
+                <br th:if="${#fields.hasErrors('treatmentMeasures')}"/>
                 <label for="treatmentMeasures"></label>
                 <input class="inp" type="text" th:field="*{treatmentMeasures}" id="treatmentMeasures" placeholder="Рекомендации к лечению">
             </div>

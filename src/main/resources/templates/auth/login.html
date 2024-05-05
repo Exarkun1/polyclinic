@@ -11,7 +11,7 @@
     <div class="center">
         <form th:method="POST" th:action="@{/auth/login}" th:object="${loginRequest}">
             <div class="fld">
-                <span class="err" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" style="color:red"></span>
+                <span class="err" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></span>
                 <br th:if="${#fields.hasGlobalErrors()}"/>
                 <label for="login"></label>
                 <input class="inp" type="text" th:field="*{login}" id="login" placeholder="Логин">

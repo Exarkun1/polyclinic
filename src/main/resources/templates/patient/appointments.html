@@ -18,7 +18,7 @@
                 <span class="inp txt" th:text="${'Должность: ' + appointment.getDoctor().getJob().getName()}"></span>
             </div>
             <div class="fld">
-                <span class="inp txt" th:text="${'Дата рождения: ' + appointment.getDateTime()}"></span>
+                <span class="inp txt" th:text="${'Дата приёма: ' + appointment.getDateTime()}"></span>
             </div>
             <div class="fld">
                 <span class="inp txt" th:if="${appointment.getPatientComment() != null}" th:text="${'Комментарий: ' + appointment.getPatientComment()}"></span>
